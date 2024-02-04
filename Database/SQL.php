@@ -17,6 +17,8 @@ class SQL
             $db_pass,
             $db_name
         );
+
+        return $this->SQL->get_connection_stats();
     }
 
     public function Query(string $Query): mysqli_result|bool
