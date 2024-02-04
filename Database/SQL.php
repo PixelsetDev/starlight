@@ -12,9 +12,9 @@ class SQL
     {
         $this->SQL = new MySQLi(
             $db_host,
-            $db_name,
             $db_user,
-            $db_pass
+            $db_pass,
+            $db_name
         );
     }
 
