@@ -27,11 +27,21 @@ class SQL
 
     public function Query(string $Query): mysqli_result|bool
     {
-        return $this->SQL->query($Query);
+        try {
+            return $this->SQL->query($Query);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            exit;
+        }
     }
 
     public function Escape(string $Escape): string
     {
-        return $this->SQL->real_escape_string($Escape);
+        try {
+            return $this->SQL->real_escape_string($Escape);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            exit;
+        }
     }
 }
