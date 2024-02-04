@@ -9,7 +9,7 @@ class SQL
 {
     private MySQLi $SQL;
 
-    public function __construct($db_host, $db_name, $db_user, $db_pass)
+    public function __construct($db_host, $db_user, $db_pass, $db_name)
     {
         $this->SQL = new MySQLi(
             $db_host,
