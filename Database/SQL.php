@@ -2,6 +2,7 @@
 
 namespace Starlight\Database;
 
+use Exception;
 use mysqli;
 use mysqli_result;
 
@@ -11,14 +12,17 @@ class SQL
 
     public function __construct($db_host, $db_user, $db_pass, $db_name)
     {
-        $this->SQL = new MySQLi(
-            $db_host,
-            $db_user,
-            $db_pass,
-            $db_name
-        );
-
-        return $this->SQL->get_connection_stats();
+        try {
+            $this->SQL = new MySQLi(
+                $db_host,
+                $db_user,
+                $db_pass,
+                $db_name
+            );
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            exit;
+        }
     }
 
     public function Query(string $Query): mysqli_result|bool
