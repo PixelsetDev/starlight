@@ -3,6 +3,7 @@
 namespace Starlight\Database;
 
 use mysqli;
+use mysqli_result;
 
 class SQL
 {
@@ -18,7 +19,7 @@ class SQL
         );
     }
 
-    public function Query(string $Query): \mysqli_result|bool
+    public function Query(string $Query): mysqli_result|bool
     {
         return $this->SQL->query($Query);
     }
