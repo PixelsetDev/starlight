@@ -19,8 +19,6 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $this->route($Route, $IncludePath);
-        } else {
-            $this->BadRequest();
         }
     }
 
@@ -28,8 +26,6 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->route($Route, $IncludePath);
-        } else {
-            $this->BadRequest();
         }
     }
 
@@ -37,8 +33,6 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             $this->route($Route, $IncludePath);
-        } else {
-            $this->BadRequest();
         }
     }
 
@@ -46,8 +40,6 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
             $this->route($Route, $IncludePath);
-        } else {
-            $this->BadRequest();
         }
     }
 
@@ -55,8 +47,6 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             $this->route($Route, $IncludePath);
-        } else {
-            $this->BadRequest();
         }
     }
 
