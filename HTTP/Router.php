@@ -28,6 +28,8 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $this->route($Route, $IncludePath);
+        } else {
+            $this->BadRequest();
         }
     }
 
@@ -35,6 +37,8 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
             $this->route($Route, $IncludePath);
+        } else {
+            $this->BadRequest();
         }
     }
 
@@ -42,6 +46,8 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
             $this->route($Route, $IncludePath);
+        } else {
+            $this->BadRequest();
         }
     }
 
@@ -49,6 +55,8 @@ class Router
     {
         if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
             $this->route($Route, $IncludePath);
+        } else {
+            $this->BadRequest();
         }
     }
 
@@ -61,12 +69,6 @@ class Router
     {
         if (!is_callable($IncludePath) && !strpos($IncludePath, '.php')) {
             $IncludePath .= '.php';
-        }
-        if ($Route == '/404') {
-            require_once __DIR__.'/'.$IncludePath;
-            $Response = new Response();
-            $Response->HTTP404();
-            exit;
         }
         $RequestURL = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
         $RequestURL = rtrim($RequestURL, '/');
