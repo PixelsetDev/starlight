@@ -19,6 +19,7 @@ class SQL
                 $db_pass,
                 $db_name
             );
+            $this->SQL->set_charset("utf8");
         } catch (Exception $e) {
             echo $e->getMessage();
             exit;
