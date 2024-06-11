@@ -15,6 +15,7 @@ class Router
     public function __construct() {
         require_once __DIR__ . '/Response.php';
     }
+    
     public function GET($Route, $IncludePath): void
     {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -55,7 +56,7 @@ class Router
         $this->route($Route, $IncludePath);
     }
 
-    public function route($Route, $IncludePath): void
+    private function route($Route, $IncludePath): void
     {
         if (!is_callable($IncludePath) && !strpos($IncludePath, '.php')) {
             $IncludePath .= '.php';
@@ -98,7 +99,7 @@ class Router
         exit;
     }
 
-    public function BadRequest(): void
+    private function BadRequest(): void
     {
         $Response = new Response();
         $Response->HTTP405();
