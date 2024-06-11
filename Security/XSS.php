@@ -10,7 +10,7 @@
 
 namespace Starlight\Security;
 
-class XXS
+class XSS
 {
     public function Escape($Text): string
     {
