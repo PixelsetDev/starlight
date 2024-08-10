@@ -12,7 +12,7 @@ namespace Starlight\Security;
 
 class CSRF
 {
-    public function Set(): string
+    public function set(): string
     {
         if (!isset($_SESSION['csrf'])) {
             $_SESSION['csrf'] = bin2hex(random_bytes(50));
@@ -20,7 +20,7 @@ class CSRF
         return '<input type="hidden" name="csrf" value="'.$_SESSION['csrf'].'">';
     }
 
-    public function Check(): bool
+    public function check(): bool
     {
         if (!isset($_SESSION['csrf']) || !isset($_POST['csrf'])) {
             return false;

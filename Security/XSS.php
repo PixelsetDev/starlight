@@ -12,8 +12,8 @@ namespace Starlight\Security;
 
 class XSS
 {
-    public function Escape($Text): string
+    public function escape($text): string
     {
-        return htmlspecialchars($Text);
+        return htmlspecialchars($text);
     }
 }

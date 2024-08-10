@@ -8,12 +8,12 @@ use mysqli_result;
 
 class SQL
 {
-    private MySQLi $SQL;
+    private MySQLi $sql;
 
     public function __construct($db_host, $db_user, $db_pass, $db_name)
     {
         try {
-            $this->SQL = new MySQLi(
+            $this->sql = new MySQLi(
                 $db_host,
                 $db_user,
                 $db_pass,
@@ -26,20 +26,20 @@ class SQL
         }
     }
 
-    public function Query(string $Query): mysqli_result|bool
+    public function query(string $query): mysqli_result|bool
     {
         try {
-            return $this->SQL->query($Query);
+            return $this->sql->query($query);
         } catch (Exception $e) {
             echo $e->getMessage();
             exit;
         }
     }
 
-    public function Escape(string $Escape): string
+    public function escape(string $escape): string
     {
         try {
-            return $this->SQL->real_escape_string($Escape);
+            return $this->sql->real_escape_string($escape);
         } catch (Exception $e) {
             echo $e->getMessage();
             exit;

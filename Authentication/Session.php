@@ -1,25 +1,25 @@
 <?php
 
-namespace Starlight\Session;
+namespace Starlight\Authentication;
 
 class Session
 {
-    public function Start(): void
+    public function start(): void
     {
         session_start();
     }
 
-    public function Login(String $uniqueValue): void
+    public function login(String $uniqueValue): void
     {
         $_SESSION['starlight_token'] = password_hash($uniqueValue, PASSWORD_BCRYPT);
     }
 
-    public function Verify(String $uniqueValue): bool
+    public function verify(String $uniqueValue): bool
     {
         return password_verify($uniqueValue, $_SESSION['starlight_token']);
     }
 
-    public function End(String $uniqueValue): void
+    public function end(String $uniqueValue): void
     {
         unset($_SESSION[$uniqueValue]);
         unset($_SESSION['starlight_token']);
