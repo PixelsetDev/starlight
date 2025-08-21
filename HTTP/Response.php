@@ -17,6 +17,7 @@ class Response
     public function http200(): void { $this->Response('200'); }
     public function http201(): void { $this->Response('201'); }
     public function http202(): void { $this->Response('202'); }
+    public function http204(): void { $this->Response('204'); }
     public function http400(): void { $this->Response('400'); }
     public function http401(): void { $this->Response('401'); }
     public function http402(): void { $this->Response('402'); }
