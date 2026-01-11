@@ -36,31 +36,31 @@ final class PostgreSQL
         $this->dbo = DBO::connect($dsn, $db_user, $db_pass, $pdoOptions);
     }
 
-    /** @see SQL::run() */
+    /** @see DBO::run() */
     public function run(string $sql, array $params = []): PDOStatement|bool
     {
         return $this->dbo->run($sql, $params);
     }
 
-    /** @see SQL::fetchAll() */
+    /** @see DBO::fetchAll() */
     public function fetchAll(string $sql, array $params = []): array
     {
         return $this->dbo->fetchAll($sql, $params);
     }
 
-    /** @see SQL::fetchOne() */
+    /** @see DBO::fetchOne() */
     public function fetchOne(string $sql, array $params = []): ?array
     {
         return $this->dbo->fetchOne($sql, $params);
     }
 
-    /** @see SQL::fetchValue() */
+    /** @see DBO::fetchValue() */
     public function fetchValue(string $sql, array $params = []): mixed
     {
         return $this->dbo->fetchValue($sql, $params);
     }
 
-    /** @see SQL::lastInsertId() */
+    /** @see DBO::lastInsertId() */
     public function lastInsertId(): string
     {
         return $this->dbo->lastInsertId();
