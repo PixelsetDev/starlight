@@ -7,7 +7,7 @@ use PDOStatement;
 /**
  * The Microsoft SQL Server connector.
  */
-final class SQLServer
+final class MSSQL
 {
     /**
      * Internal database engine wrapper.
