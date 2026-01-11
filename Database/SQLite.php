@@ -11,9 +11,9 @@ final class SQLite
 {
     /**
      * Internal database engine wrapper.
-     * @var DBO
+     * @var DBMS
      */
-    private DBO $dbo;
+    private DBMS $DBMS;
 
     /**
      * Create a new SQLite instance.
@@ -23,36 +23,42 @@ final class SQLite
     public function __construct(string $db_path, array $pdoOptions = [])
     {
         $dsn = sprintf('sqlite:%s', $db_path);
-        $this->dbo = DBO::connect($dsn, null, null, $pdoOptions);
+        $this->DBMS = DBMS::connect($dsn, null, null, $pdoOptions);
     }
 
-    /** @see DBO::run() */
+    /** @see DBMS::run() */
     public function run(string $sql, array $params = []): PDOStatement|bool
     {
-        return $this->dbo->run($sql, $params);
+        return $this->DBMS->run($sql, $params);
     }
 
-    /** @see DBO::fetchAll() */
+    /** @see DBMS::fetchAll() */
     public function fetchAll(string $sql, array $params = []): array
     {
-        return $this->dbo->fetchAll($sql, $params);
+        return $this->DBMS->fetchAll($sql, $params);
     }
 
-    /** @see DBO::fetchOne() */
+    /** @see DBMS::fetchOne() */
     public function fetchOne(string $sql, array $params = []): ?array
     {
-        return $this->dbo->fetchOne($sql, $params);
+        return $this->DBMS->fetchOne($sql, $params);
     }
 
-    /** @see DBO::fetchValue() */
+    /** @see DBMS::fetchValue() */
     public function fetchValue(string $sql, array $params = []): mixed
     {
-        return $this->dbo->fetchValue($sql, $params);
+        return $this->DBMS->fetchValue($sql, $params);
     }
 
-    /** @see DBO::lastInsertId() */
+    /** @see DBMS::lastInsertId() */
     public function lastInsertId(): string
     {
-        return $this->dbo->lastInsertId();
+        return $this->DBMS->lastInsertId();
+    }
+
+    /** @see DBMS::numRows() */
+    public function numRows(): int
+    {
+        return $this->DBMS->numRows();
     }
 }

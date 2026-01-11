@@ -11,9 +11,9 @@ final class MSSQL
 {
     /**
      * Internal database engine wrapper.
-     * @var DBO
+     * @var DBMS
      */
-    private DBO $dbo;
+    private DBMS $DBMS;
 
     /**
      * Create a new SQL Server instance.
@@ -33,36 +33,42 @@ final class MSSQL
         array $pdoOptions = []
     ) {
         $dsn = sprintf('sqlsrv:Server=%s,%d;Database=%s', $db_host, $db_port, $db_name);
-        $this->dbo = DBO::connect($dsn, $db_user, $db_pass, $pdoOptions);
+        $this->DBMS = DBMS::connect($dsn, $db_user, $db_pass, $pdoOptions);
     }
 
-    /** @see DBO::run() */
+    /** @see DBMS::run() */
     public function run(string $sql, array $params = []): PDOStatement|bool
     {
-        return $this->dbo->run($sql, $params);
+        return $this->DBMS->run($sql, $params);
     }
 
-    /** @see DBO::fetchAll() */
+    /** @see DBMS::fetchAll() */
     public function fetchAll(string $sql, array $params = []): array
     {
-        return $this->dbo->fetchAll($sql, $params);
+        return $this->DBMS->fetchAll($sql, $params);
     }
 
-    /** @see DBO::fetchOne() */
+    /** @see DBMS::fetchOne() */
     public function fetchOne(string $sql, array $params = []): ?array
     {
-        return $this->dbo->fetchOne($sql, $params);
+        return $this->DBMS->fetchOne($sql, $params);
     }
 
-    /** @see DBO::fetchValue() */
+    /** @see DBMS::fetchValue() */
     public function fetchValue(string $sql, array $params = []): mixed
     {
-        return $this->dbo->fetchValue($sql, $params);
+        return $this->DBMS->fetchValue($sql, $params);
     }
 
-    /** @see DBO::lastInsertId() */
+    /** @see DBMS::lastInsertId() */
     public function lastInsertId(): string
     {
-        return $this->dbo->lastInsertId();
+        return $this->DBMS->lastInsertId();
+    }
+
+    /** @see DBMS::numRows() */
+    public function numRows(): int
+    {
+        return $this->DBMS->numRows();
     }
 }
