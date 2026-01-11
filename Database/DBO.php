@@ -6,7 +6,7 @@ use PDO;
 use PDOStatement;
 
 /**
- * The database connector. You may find it easier to use driver-specific classes.
+ * The database engine wrapper.
  */
 final class DBO
 {
@@ -26,12 +26,32 @@ final class DBO
     }
 
     /**
-     * Runs a prepared SQL query safely.
-     * @param string $sql    SQL query containing ? or :named placeholders.
-     * @param array  $params Parameters to bind to the query.
-     * @return PDOStatement|true
+     * Create a PDO connection wrapped in DBO.
+     * @param string $dsn PDO DSN string.
+     * @param string|null $user Database username.
+     * @param string|null $pass Database password.
+     * @param array $pdoOptions Optional custom PDO options.
+     * @return DBO
      */
-    public function run(string $sql, array $params = []): PDOStatement|true
+    public static function connect(string $dsn, ?string $user = null, ?string $pass = null, array $pdoOptions = []): DBO
+    {
+        $defaults = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ];
+
+        $pdo = new PDO($dsn, $user ?? '', $pass ?? '', $pdoOptions + $defaults);
+        return new DBO($pdo);
+    }
+
+    /**
+     * Runs a prepared SQL query.
+     * @param string $sql SQL query with placeholders.
+     * @param array $params Parameters to bind.
+     * @return PDOStatement|bool
+     */
+    public function run(string $sql, array $params = []): PDOStatement|bool
     {
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute($params);
@@ -64,26 +84,22 @@ final class DBO
     public function fetchOne(string $sql, array $params = []): ?array
     {
         $stmt = $this->run($sql, $params);
-        if ($stmt === true) {
-            return null;
-        }
+        if ($stmt === true) return null;
 
         $row = $stmt->fetch();
         return $row === false ? null : $row;
     }
 
     /**
-     * Executes a query and returns the first column of the first row. Useful for COUNT(*), EXISTS, SUM(), etc.
+     * Executes a query and returns a single scalar value.
      * @param string $sql
-     * @param array  $params
+     * @param array $params
      * @return mixed|null
      */
     public function fetchValue(string $sql, array $params = []): mixed
     {
         $stmt = $this->run($sql, $params);
-        if ($stmt === true) {
-            return null;
-        }
+        if ($stmt === true) return null;
 
         $val = $stmt->fetchColumn(0);
         return $val === false ? null : $val;
